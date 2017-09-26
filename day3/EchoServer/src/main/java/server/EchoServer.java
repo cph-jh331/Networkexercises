@@ -2,6 +2,7 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.Locale;
 
 public class EchoServer {
 
