@@ -19,11 +19,12 @@ public class EchoServer {
         String inputLine;
         while ((inputLine = in.readLine()) != null)
         {
-            if (".".equals(inputLine))
+            if ("exit".equals(inputLine))
             {
                 out.println("goodbye");
                 break;
             }
+            out.println(inputLine.toUpperCase());
         }
     }
 
@@ -38,7 +39,7 @@ public class EchoServer {
     public static void main(String[] args) throws IOException
     {
         EchoServer server = new EchoServer();
-        server.start(4444);
+        server.start(9997);
     }
 
 }
