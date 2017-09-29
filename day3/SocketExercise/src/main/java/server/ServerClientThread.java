@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerClientThread extends Thread {
 
@@ -47,6 +49,11 @@ public class ServerClientThread extends Thread {
 
             while ((inputLine = in.readLine()) != null)
             {
+                if (clientSocket.isClosed())
+                {
+                    System.out.println("hvad fanden");
+                    break;
+                }
 
                 System.out.println("SERVER: RECEIVED INPUT - " + inputLine);
                 if (inputLine.contains("#") && inputLine.length() > 0)
@@ -87,6 +94,7 @@ public class ServerClientThread extends Thread {
                         case "EXIT":
                             System.out.println("SERVER: CLIENT EXITED!");
                             out.println("goodbye!");
+                            clients.remove(this);                            
                             return;
                         case "MSGALL":
                             sendMessageToAll(this.name + " yells " + wordStr.toUpperCase());
@@ -102,10 +110,10 @@ public class ServerClientThread extends Thread {
                 }
 
             }
-
-        } catch (IOException e)
+        } catch (IOException ex)
         {
-            System.out.println("røv");
+            Logger.getLogger(ServerClientThread.class.getName()).log(Level.SEVERE, null, ex);
+
         } finally
         {
             try
@@ -133,7 +141,7 @@ public class ServerClientThread extends Thread {
 
     public void getMessage(String msg)
     {
-        out.println(msg);        
+        out.println(msg);
     }
 
 }
