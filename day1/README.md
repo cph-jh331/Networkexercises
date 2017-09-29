@@ -1,4 +1,6 @@
 # Day 1 exercise
+Day1exercise1 prints out the request headers if you run the Day1Servlet.
+Day1exercise2 contains two servlets. First is CookieDemo and the other is SessionDemo
 ## Headers:
 Q1:<br>
 First time you load it, it has the status 200, next time it is 304(not modified), meaning that the page is cached.<br>
