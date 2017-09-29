@@ -44,7 +44,14 @@ public class ServerClientThread extends Thread {
         {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out.println("Welcome...");
+            out.println("Welcome...\n"
+                    + "\tTIME# - to see the time.\n"
+                    + "\tUPPER#text - to convert text to uppercase.\n"
+                    + "\tLOWER#text - to convert text to lowercase.\n"
+                    + "\tREVERSE#text - to reverse the text.\n"
+                    + "\tTRANSLATE#text - to translate a word.\n"
+                    + "\tMSGALL#text - to send a message to all clients.\n"
+                    + "\tEXIT# - to exit the server.\n");
             String inputLine;
 
             while ((inputLine = in.readLine()) != null)
@@ -94,7 +101,7 @@ public class ServerClientThread extends Thread {
                         case "EXIT":
                             System.out.println("SERVER: CLIENT EXITED!");
                             out.println("goodbye!");
-                            clients.remove(this);                            
+                            clients.remove(this);
                             return;
                         case "MSGALL":
                             sendMessageToAll(this.name + " yells " + wordStr.toUpperCase());

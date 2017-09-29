@@ -3,16 +3,13 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ServerMessageThread extends Thread {
+public class MessageThread extends Thread {
 
     private BufferedReader in;
-    private static boolean isRunning;
 
-    public ServerMessageThread(BufferedReader in, boolean isRunning)
+    public MessageThread(BufferedReader in)
     {
-        this.isRunning = isRunning;
         this.in = in;
-
     }
 
     @Override
@@ -21,7 +18,7 @@ public class ServerMessageThread extends Thread {
         try
         {
             String stopBlockingMsg = "";
-            while (isRunning)
+            while (true)
             {
                 if ("goodbye!".equals(stopBlockingMsg))
                 {
@@ -38,10 +35,4 @@ public class ServerMessageThread extends Thread {
 
         }
     }
-
-    public void setIsRunning(boolean isRunning)
-    {
-        this.isRunning = isRunning;
-    }
-
 }
